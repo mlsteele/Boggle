@@ -1,6 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>
+        Array.prototype.remove = function(from, to) {
+          var rest = this.slice((to || from) + 1 || this.length);
+          this.length = from < 0 ? this.length + from : from;
+          return this.push.apply(this, rest);
+        };
+        $(document).ready(function(){
+                letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                dice = ["aaafrs",
+                        "aaeeee",
+                        "aafirs",
+                        "adennn",
+                        "aeeeem",
+
+                        "aeegmu",
+                        "aegmnn",
+                        "afirsy",
+                        "bjkqxz",
+                        "ccenst",
+
+                        "ceiilt",
+                        "ceilpt",
+                        "ceipst",
+                        "ddhnot",
+                        "dhhlor",
+
+                        "dhlnor",
+                        "dhlnor",
+                        "eiiitt",
+                        "emottt",
+                        "ensssu",
+
+                        "fiprsy",
+                        "gorrvw",
+                        "iprrry",
+                        "nootuw",
+                        "ooottu"
+                ]
+                $("button").click(function(){
+                        mydice = dice.slice()
+                        $("td").each(function(){
+                                die_id = Math.floor(Math.random()*mydice.length);
+                                die = mydice[die_id];
+                                console.log("Die: " + die);
+                                mydice.remove(die_id);
+                                console.log(mydice);
+                                letter = die.charAt(Math.floor(Math.random() * 5)).toUpperCase();
+                                if(letter=="Q"){letter="Qu"}
+                                $(this).html(letter);
+                        }) 
+                });
+        });
+        </script>
         <style>
         td{
                 font: bold 48px Arial, sans-serif;
@@ -33,25 +87,35 @@
                         <td>B</td>
                         <td>C</td>
                         <td>D</td>
+                        <td>Q</td>
                 </tr>
                 <tr>
                         <td>E</td>
                         <td>F</td>
                         <td>G</td>
                         <td>H</td>
+                        <td>R</td>
                 </tr>
                 <tr>
                         <td>I</td>
                         <td>J</td>
                         <td>K</td>
                         <td>L</td>
+                        <td>S</td>
                 </tr>
                 <tr>
                         <td>M</td>
                         <td>N</td>
                         <td>O</td>
                         <td>P</td>
+                        <td>T</td>
                 </tr>
+                <tr>
+                        <td>U</td>
+                        <td>V</td>
+                        <td>W</td>
+                        <td>X</td>
+                        <td>Y</td>
         </table>
         <button>Shuffle</button>
 </body>
