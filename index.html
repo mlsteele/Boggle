@@ -10,7 +10,7 @@
       return this.push.apply(this, rest);
     };
     function times_up() {
-        $("td").html("&nbsp;")
+        //$("td").html("&nbsp;")
     }
     function decrement_timer(){
         sec = (parseInt($("[sec]").html()) + 59) % 60;
@@ -19,12 +19,10 @@
         if(sec==59){min -=1}
         //console.log("min = " + min)
         if(min==0 && sec==0){
+            $("[timer]").css("color","red")
             //console.log("clear interval");
             window.clearInterval(timer);
             times_up();
-        }
-        if(min==0 && sec==10){
-            $("[timer]").css("color","red")
         }
         $("[sec]").html((sec < 10 ? '0' : '') + sec);
         $("[min]").html(min);
