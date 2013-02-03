@@ -32,7 +32,7 @@
         $("[timer]").css("color","darkblue")
         $("[min]").html("2");
         $("[sec]").html("00");
-        timer = window.setInterval(function(){decrement_timer()},1000);
+        $("#resume").trigger('click');
     }
     $(document).ready(function(){
         $("#resume").hide();
