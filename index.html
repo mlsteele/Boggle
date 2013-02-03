@@ -1,122 +1,147 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script>
-        Array.prototype.remove = function(from, to) {
-          var rest = this.slice((to || from) + 1 || this.length);
-          this.length = from < 0 ? this.length + from : from;
-          return this.push.apply(this, rest);
-        };
-        $(document).ready(function(){
-                letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                dice = ["aaafrs",
-                        "aaeeee",
-                        "aafirs",
-                        "adennn",
-                        "aeeeem",
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+    Array.prototype.remove = function(from, to) {
+      var rest = this.slice((to || from) + 1 || this.length);
+      this.length = from < 0 ? this.length + from : from;
+      return this.push.apply(this, rest);
+    };
+    function decrement_timer(){
+        sec = (parseInt($("[sec]").html()) + 59) % 60;
+        //console.log("sec = " + sec)
+        min = parseInt($("[min]").html());
+        if(sec==59){min -=1}
+        //console.log("min = " + min)
+        if(min==0 && sec==0){
+            console.log("clear interval");
+            window.clearInterval(timer);
+        }
+        $("[sec]").html((sec < 10 ? '0' : '') + sec);
+        $("[min]").html(min);
+    }
+    function run_timer() {
+        if(typeof(timer)!= "undefined") window.clearInterval(timer);
+        $("[min]").html("2");
+        $("[sec]").html("00");
+        timer = window.setInterval(function(){decrement_timer()},1000);
+    }
+    $(document).ready(function(){
+        dice = ["aaafrs",
+            "aaeeee",
+            "aafirs",
+            "adennn",
+            "aeeeem",
 
-                        "aeegmu",
-                        "aegmnn",
-                        "afirsy",
-                        "bjkqxz",
-                        "ccenst",
+            "aeegmu",
+            "aegmnn",
+            "afirsy",
+            "bjkqxz",
+            "ccenst",
 
-                        "ceiilt",
-                        "ceilpt",
-                        "ceipst",
-                        "ddhnot",
-                        "dhhlor",
+            "ceiilt",
+            "ceilpt",
+            "ceipst",
+            "ddhnot",
+            "dhhlor",
 
-                        "dhlnor",
-                        "dhlnor",
-                        "eiiitt",
-                        "emottt",
-                        "ensssu",
+            "dhlnor",
+            "dhlnor",
+            "eiiitt",
+            "emottt",
+            "ensssu",
 
-                        "fiprsy",
-                        "gorrvw",
-                        "iprrry",
-                        "nootuw",
-                        "ooottu"
-                ]
-                $("button").click(function(){
-                        mydice = dice.slice()
-                        $("td").each(function(){
-                                die_id = Math.floor(Math.random()*mydice.length);
-                                die = mydice[die_id];
-                                console.log("Die: " + die);
-                                mydice.remove(die_id);
-                                console.log(mydice);
-                                letter = die.charAt(Math.floor(Math.random() * 5)).toUpperCase();
-                                if(letter=="Q"){letter="Qu"}
-                                $(this).html(letter);
-                        }) 
-                });
+            "fiprsy",
+            "gorrvw",
+            "iprrry",
+            "nootuw",
+            "ooottu"
+        ]
+        $("button").click(function(){
+            mydice = dice.slice()
+            $("td").each(function(){
+                die_id = Math.floor(Math.random()*mydice.length);
+                die = mydice[die_id];
+                //console.log("Die: " + die);
+                mydice.remove(die_id);
+                //console.log(mydice);
+                letter = die.charAt(Math.floor(Math.random() * 5)).toUpperCase();
+                if(letter=="Q"){letter="Qu"}
+                $(this).html(letter);
+            }) 
+            run_timer();
         });
-        </script>
-        <style>
-        td{
-                font: bold 48px Arial, sans-serif;
-                color: darkblue;
-                background: #ccc;
-                box-shadow: inset 0px 0px 10px #999,
-                            inset 0px 0px 5px #666;
-                border-radius: 5px 5px;
-                width:58px;
-                /*height:46px;*/
-                padding:0;
-                text-align: center;
-                margin: 3px;
-        }
-        table {
-                background: darkblue;
-                margin: 0 auto;
-                padding: 5px;
-        }
-        button {
-                display:block;
-                margin: 10px auto;
-        }
-        </style>
+    });
+    </script>
+    <style>
+    td{
+        font: bold 48px Arial, sans-serif;
+        color: darkblue;
+        background: #ccc;
+        box-shadow: inset 0px 0px 10px #999,
+                inset 0px 0px 5px #666;
+        border-radius: 5px 5px;
+        width:58px;
+        /*height:46px;*/
+        padding:0;
+        text-align: center;
+        margin: 3px;
+    }
+    table {
+        background: darkblue;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    button {
+        display:block;
+        margin: 10px auto;
+    }
+    [timer] {
+        font: bold 36px Arial, sans-serif;
+        color: darkblue;
+        text-align: center;
+    }
+    </style>
 </head>
 <body>
-        <table>
-                <tr>
-                        <td>A</td>
-                        <td>B</td>
-                        <td>C</td>
-                        <td>D</td>
-                        <td>Q</td>
-                </tr>
-                <tr>
-                        <td>E</td>
-                        <td>F</td>
-                        <td>G</td>
-                        <td>H</td>
-                        <td>R</td>
-                </tr>
-                <tr>
-                        <td>I</td>
-                        <td>J</td>
-                        <td>K</td>
-                        <td>L</td>
-                        <td>S</td>
-                </tr>
-                <tr>
-                        <td>M</td>
-                        <td>N</td>
-                        <td>O</td>
-                        <td>P</td>
-                        <td>T</td>
-                </tr>
-                <tr>
-                        <td>U</td>
-                        <td>V</td>
-                        <td>W</td>
-                        <td>X</td>
-                        <td>Y</td>
-        </table>
-        <button>Shuffle</button>
+    <table>
+        <tr>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>D</td>
+            <td>Q</td>
+        </tr>
+        <tr>
+            <td>E</td>
+            <td>F</td>
+            <td>G</td>
+            <td>H</td>
+            <td>R</td>
+        </tr>
+        <tr>
+            <td>I</td>
+            <td>J</td>
+            <td>K</td>
+            <td>L</td>
+            <td>S</td>
+        </tr>
+        <tr>
+            <td>M</td>
+            <td>N</td>
+            <td>O</td>
+            <td>P</td>
+            <td>T</td>
+        </tr>
+        <tr>
+            <td>U</td>
+            <td>V</td>
+            <td>W</td>
+            <td>X</td>
+            <td>Y</td>
+    </table>
+    <button>Shuffle</button>
+    <div timer><span min>2</span>:<span sec>00</span></div>
 </body>
 </html>
