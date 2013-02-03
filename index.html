@@ -35,6 +35,8 @@
         timer = window.setInterval(function(){decrement_timer()},1000);
     }
     $(document).ready(function(){
+        $("#resume").hide();
+        $("#paused").hide();
         dice = ["aaafrs",
             "aaeeee",
             "aafirs",
@@ -65,7 +67,7 @@
             "nootuw",
             "ooottu"
         ]
-        $("button").click(function(){
+        $("#start").click(function(){
             mydice = dice.slice()
             $("td").each(function(){
                 die_id = Math.floor(Math.random()*mydice.length);
@@ -78,6 +80,18 @@
                 $(this).html(letter);
             }) 
             run_timer();
+        });
+        $("#pause").click(function(){
+            if(typeof(timer)!="undefined") window.clearInterval(timer);
+            $("#paused").show();
+            $("#pause").hide();
+            $("#resume").show();
+        });
+        $("#resume").click(function(){
+            timer = window.setInterval(function(){decrement_timer()},1000);
+            $("#paused").hide();
+            $("#resume").hide();
+            $("#pause").show();
         });
     });
     </script>
@@ -109,9 +123,18 @@
         color: darkblue;
         text-align: center;
     }
+    #paused {
+       position:absolute;
+       top:50px;
+       color:red;
+       font:bold 150px Arial, sans-serif;
+       text-align:center;
+       width:100%;
+    }
     </style>
 </head>
 <body>
+    <div id="paused">PAUSED</div>
     <table>
         <tr>
             <td>&nbsp;</td>
@@ -148,7 +171,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
     </table>
-    <button>Start</button>
+    <button id="start">Start</button> <button id="pause">Pause</button><button id="resume">Resume</button>
     <div timer><span min>2</span>:<span sec>00</span></div>
 </body>
 </html>
