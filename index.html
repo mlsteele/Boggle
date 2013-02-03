@@ -19,15 +19,19 @@
         if(sec==59){min -=1}
         //console.log("min = " + min)
         if(min==0 && sec==0){
-            console.log("clear interval");
+            //console.log("clear interval");
             window.clearInterval(timer);
             times_up();
+        }
+        if(min==0 && sec==10){
+            $("[timer]").css("color","red")
         }
         $("[sec]").html((sec < 10 ? '0' : '') + sec);
         $("[min]").html(min);
     }
     function run_timer() {
         if(typeof(timer)!= "undefined") window.clearInterval(timer);
+        $("[timer]").css("color","darkblue")
         $("[min]").html("2");
         $("[sec]").html("00");
         timer = window.setInterval(function(){decrement_timer()},1000);
@@ -71,7 +75,7 @@
                 //console.log("Die: " + die);
                 mydice.remove(die_id);
                 //console.log(mydice);
-                letter = die.charAt(Math.floor(Math.random() * 5)).toUpperCase();
+                letter = die.charAt(Math.floor(Math.random() * 6)).toUpperCase();
                 if(letter=="Q"){letter="Qu"}
                 $(this).html(letter);
             }) 
