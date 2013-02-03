@@ -1,0 +1,44 @@
+.gradient(@color1, @color2, @direction) {
+  background: @color1;
+  background: -moz-linear-gradient(@direction, @color1 0%, @color2 100%);
+  background: -webkit-linear-gradient(@direction, @color1 0%, @color2 100%);
+  background: -o-linear-gradient(@direction, @color1 0%, @color2 100%);
+  background: -ms-linear-gradient(@direction, @color1 0%, @color2 100%);
+}
+
+.gradient(@color1,@color2,@direction) when (@direction = left) {
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,@color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+  background: linear-gradient(to right,  @color1 0%, @color2 100%); /* W3C */
+}
+
+.gradient(@color1,@color2,@direction) when (@direction = right) {
+  background: -webkit-gradient(linear, right top, left top, color-stop(0%,@color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+  background: linear-gradient(to left,  @color1 0%, @color2 100%); /* W3C */
+}
+
+.gradient(@color1,@color2,@direction) when (@direction = top) {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+  background: linear-gradient(to bottom,  @color1 0%, @color2 100%); /* W3C */
+}
+
+.gradient(@color1,@color2,@direction) when (@direction = bottom) {
+  background: -webkit-gradient(linear, left bottom, right bottom, color-stop(0%,@color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+  background: linear-gradient(to top,  @color1 0%, @color2 100%); /* W3C */
+}
+
+
+body {
+  background-color: #fff;
+  // .gradient(#fff, #000, top);
+}
+
+.doodle {
+  width: 100px;
+  height: 100px;
+  background-color: #0f0;
+  position: relative;
+}
+
+.die {
+
+}
